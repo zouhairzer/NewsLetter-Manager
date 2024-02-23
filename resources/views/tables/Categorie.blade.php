@@ -119,6 +119,7 @@
       </div>
     </div>
       </div>
+
 @include('partials.Auth._scriptes')
 </body>
 </html>
