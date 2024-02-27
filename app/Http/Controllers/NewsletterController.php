@@ -15,11 +15,8 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $newsletters = DB::table('newsletters')
-            ->join('categories', 'newsletters.category', '=', 'categories.id')
-            ->select('newsletters.*', 'contacts.phone')
-            ->get();
-        return view('newsletters.index', ['newsletters' => $newsletters, 'categories' => Category::all()]);
+        $newsletters = Newsletter::all();
+        return view('tables.News_Letter', ['newsletters' => $newsletters, 'categories' => Category::all()]);
     }
 
     /**
@@ -35,12 +32,16 @@ class NewsletterController extends Controller
      */
     public function store(StoreNewsletterRequest $request)
     {
+        $img = $request->file('image');
+        $image_name = $img->getClientOriginalName();
+        $image = uniqid() . $image_name;
+        $img->move('Uploads/', $image);
         Newsletter::create([
             'title' => $request->title,
             'author' =>$request->author,
-            'category' => $request->category,
+            'category_id' => $request->category,
             'content' => $request->content,
-            'image' => $request->image,
+            'image' => $image,
             'link' => $request->link
         ]);
         return back()->with('success', 'Newsletter created successfully');
@@ -67,13 +68,31 @@ class NewsletterController extends Controller
      */
     public function update(UpdateNewsletterRequest $request, Newsletter $newsletter)
     {
-        $newsletter->title = $request->title;
-        $newsletter->author = $request->author;
-        $newsletter->category = $request->category;
-        $newsletter->content = $request->content;
-        $newsletter->image = $request->image;
-        $newsletter->link = $request->link;
-        $newsletter->update();
+        if ($request->hasFile("image")) {
+            $oldImage = public_path('Uploads/' . $newsletter->image);
+            if (file_exists($oldImage)) {
+               unlink($oldImage);
+            }
+            $img = $request->file('image');
+            $image_name = $img->getClientOriginalName();
+            $image = uniqid() . $image_name;
+            $img->move('Uploads/', $image);
+            $newsletter->title = $request->title;
+            $newsletter->author = $request->author;
+            $newsletter->category_id = $request->category;
+            $newsletter->content = $request->content;
+            $newsletter->image = $image;
+            $newsletter->link = $request->link;
+            $newsletter->update();
+         } else {
+            $newsletter->title = $request->title;
+            $newsletter->author = $request->author;
+            $newsletter->category_id = $request->category;
+            $newsletter->content = $request->content;
+            $newsletter->link = $request->link;
+            $newsletter->update();
+         }
+
         return back()->with('success', 'Newsletter updated successfully');
     }
 
