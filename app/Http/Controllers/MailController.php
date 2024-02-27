@@ -29,7 +29,10 @@ class MailController extends Controller
      */
     public function store(StoreMailRequest $request)
     {
-        //
+        Mail::create([
+            'email' => $request->email
+        ]);
+        return back()->with('success', 'Mail created successfully');
     }
 
     /**
@@ -53,7 +56,10 @@ class MailController extends Controller
      */
     public function update(UpdateMailRequest $request, Mail $mail)
     {
-        //
+        $mail->findOrfail($mail->id);
+        $mail->email = $request->email;
+        $mail->update();
+        return back()->with('success', 'Mail updated successfully');
     }
 
     /**
@@ -61,6 +67,8 @@ class MailController extends Controller
      */
     public function destroy(Mail $mail)
     {
-        //
+        $mail->findOrFail($mail->id);
+        $mail->delete();
+        return back()->with('success', 'Mail deleted successfully');
     }
 }

@@ -56,6 +56,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
+        $category->findOrfail($category->id);
         $category->name = $request->name;
         $category->update();
         return back()->with('success', 'Category updated successfully');

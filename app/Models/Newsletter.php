@@ -15,4 +15,9 @@ class Newsletter extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function email_newsletter()
+    {
+        return $this->hasMany(EmailNewsletter::class);
+    }
 }
