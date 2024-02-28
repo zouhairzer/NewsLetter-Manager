@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\test;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::resources([
     'newsletters'=> NewsletterController::class,
     'categories'=> CategoryController::class,
+    'emails'=> MailController::class,
 ]);
 Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
 
@@ -34,9 +36,6 @@ return view('Auth.login');
 });
 Route::get('register' , function(){
 return view('Auth.register');
-});
-Route::get('emails' , function(){
-return view('tables.Emails');
 });
 Route::get('users' , function(){
 return view('tables.user');
