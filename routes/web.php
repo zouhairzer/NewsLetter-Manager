@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SendMailController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,8 @@ Route::resources([
     'newsletters'=> NewsletterController::class,
     'categories'=> CategoryController::class,
 ]);
+Route::get('/send_emails', [SendMAilController::class, 'index']);
+Route::post('/send_emails', [SendMailController::class, 'send_emails']);
 
 // ---------- Alll views --------------- //
 Route::get('dashboard' , function(){
