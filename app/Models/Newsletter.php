@@ -9,7 +9,7 @@ class Newsletter extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['title', 'author', 'category', 'content', 'image', 'link'];
+    protected $fillable = ['title', 'author', 'category_id', 'content', 'image', 'link'];
 
     public function category()
     {
@@ -21,3 +21,4 @@ class Newsletter extends Model
         return $this->hasMany(EmailNewsletter::class);
     }
 }
+

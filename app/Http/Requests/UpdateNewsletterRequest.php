@@ -22,11 +22,11 @@ class UpdateNewsletterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' =>'required|,ax:255|string|unique:newsletters,title',
+            'title' =>'required|max:255|string|unique:newsletters,title',
             'author' => 'required|max:255|string',
             'category' => 'required|numeric|exists:categories,id',
             'content' => 'required|string',
-            'image' => 'string',
+            'image' => 'image|mimes:png,jpg,jpeg',
             'link' => 'required|string|max:500'
         ];
     }

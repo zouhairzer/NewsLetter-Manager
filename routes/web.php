@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SendMailController;
+use App\Http\Controllers\test;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +21,9 @@ Route::resources([
     'newsletters'=> NewsletterController::class,
     'categories'=> CategoryController::class,
 ]);
-Route::get('/send_emails', [SendMAilController::class, 'index']);
+Route::get('/send_emails', [SendMailController::class, 'index']);
 Route::post('/send_emails', [SendMailController::class, 'send_emails']);
+Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
 
 // ---------- Alll views --------------- //
 Route::get('dashboard' , function(){
@@ -36,14 +38,8 @@ return view('Auth.login');
 Route::get('register' , function(){
 return view('Auth.register');
 });
-Route::get('categorie' , function(){
-return view('tables.Categorie');
-});
 Route::get('emails' , function(){
 return view('tables.Emails');
-});
-Route::get('news_letter' , function(){
-return view('tables.News_Letter');
 });
 Route::get('users' , function(){
 return view('tables.user');

@@ -71,7 +71,7 @@
     </a>
     </li>
     <li class="nav-item ">
-    <a class="nav-link" href="/news_letter">
+    <a class="nav-link" href="/newsletters">
     <span class="sidebar-mini"> N </span>
     <span class="sidebar-normal"> News_Letter </span>
     </a>

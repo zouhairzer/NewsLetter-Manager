@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index',['categories' => Category::all()]);
+        $categories = Category::all();
+        return view('tables.Categorie',compact('categories'));
     }
 
     /**
@@ -38,9 +39,11 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $category , $id)
     {
-        //
+        $categorie = Category::where('id' , $id)->first();
+        // dd($categorie);
+        return view('tables.updateCategorie', compact('categorie'));
     }
 
     /**
@@ -59,7 +62,7 @@ class CategoryController extends Controller
         $category->findOrfail($category->id);
         $category->name = $request->name;
         $category->update();
-        return back()->with('success', 'Category updated successfully');
+        return redirect('/categories')->with('success', 'Category updated successfully');
     }
 
     /**
