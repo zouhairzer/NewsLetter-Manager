@@ -1,14 +1,4 @@
-<!--
-=========================================================
-Material Dashboard Dark PRO - v1.0.1
-=========================================================
 
-Product Page: https://www.creative-tim.com/product/material-dashboard-dark-pro
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
     <!-- Mirrored from demos.creative-tim.com/material-dashboard-dark-pro/examples/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 10:48:58 GMT -->
@@ -751,3 +741,4 @@ The above copyright notice and this permission notice shall be included in all c
 
     <!-- Mirrored from demos.creative-tim.com/material-dashboard-dark-pro/examples/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 10:48:58 GMT -->
 </html>
+

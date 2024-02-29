@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreNewsletterRequest extends FormRequest
+class StoreEmailNewsletterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,12 +22,7 @@ class StoreNewsletterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' =>'required|max:255|string|unique:newsletters,title',
-            'author' => 'required|max:255|string',
-            'category' => 'required|numeric|exists:categories,id',
-            'content' => 'required|string',
-            'image' => 'required|image|mimes:png,jpg,jpeg',
-            'link' => 'required|string|max:500'
+            //
         ];
     }
 }

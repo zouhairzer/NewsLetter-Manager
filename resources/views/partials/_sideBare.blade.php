@@ -59,19 +59,19 @@
     <div class="collapse" id="pagesExamples">
     <ul class="nav">
     <li class="nav-item ">
-    <a class="nav-link" href="/categorie">
+    <a class="nav-link" href="/categories">
     <span class="sidebar-mini"> C </span>
     <span class="sidebar-normal"> Categories </span>
     </a>
     </li>
     <li class="nav-item ">
-    <a class="nav-link" href="/users">
-    <span class="sidebar-mini"> U </span>
-    <span class="sidebar-normal"> Users </span>
+    <a class="nav-link" href="/emails">
+    <span class="sidebar-mini"> E </span>
+    <span class="sidebar-normal"> Emails </span>
     </a>
     </li>
     <li class="nav-item ">
-    <a class="nav-link" href="/news_letter">
+    <a class="nav-link" href="/newsletters">
     <span class="sidebar-mini"> N </span>
     <span class="sidebar-normal"> News_Letter </span>
     </a>

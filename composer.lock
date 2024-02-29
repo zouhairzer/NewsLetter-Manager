@@ -4,7 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+
     "content-hash": "d30c731e704af4eef6791d15b6eb0215",
+
     "packages": [
         {
             "name": "brick/math",
@@ -6273,6 +6275,7 @@
         },
         {
             "name": "laravel/sail",
+
             "version": "v1.28.1",
             "source": {
                 "type": "git",
@@ -6283,6 +6286,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/f84e444a3dbc1811803cd2a050bdd54ff6f5eef8",
                 "reference": "f84e444a3dbc1811803cd2a050bdd54ff6f5eef8",
+
                 "shasum": ""
             },
             "require": {
@@ -6331,7 +6335,9 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+
             "time": "2024-02-23T00:24:47+00:00"
+
         },
         {
             "name": "mockery/mockery",

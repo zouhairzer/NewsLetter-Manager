@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,10 +8,11 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+        protected $fillable = ['name'];
 
-    public function newsletter()
-    {
-        return $this->hasMany(Category::class);
-    }
+        public function newsletter()
+        {
+            
+            return $this->hasMany(Newsletter::class);
+        }
 }

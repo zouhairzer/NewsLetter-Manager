@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::resources([
     'newsletters'=> NewsletterController::class,
     'categories'=> CategoryController::class,
+    'emails'=> MailController::class,
 ]);
+Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
 
 // ---------- Alll views --------------- //
-Route::get('dashboard' , function(){
-return view('dashboard');
-});
+
 Route::get('/' , function(){
 return view('Auth.login');
 });
@@ -34,19 +37,20 @@ return view('Auth.login');
 Route::get('register' , function(){
 return view('Auth.register');
 });
-Route::get('categorie' , function(){
-return view('tables.Categorie');
-});
-Route::get('emails' , function(){
-return view('tables.Emails');
-});
-Route::get('news_letter' , function(){
-return view('tables.News_Letter');
-});
 Route::get('users' , function(){
 return view('tables.user');
 });
 // --------------------------------------- //
+
+Route::get('/search', [DashboardController::class, 'search']);
+Route::get('/filter', [MailController::class, 'filterByEmail'])->name('newletter.filterEmail');
+Route::get('dashboard' , [DashboardController::class,'dashboard']);
+
+Route::post('/searchbycategory' , [NewsletterController::class , 'searchbycategory']);
+
+
+
+
 
 Route::post('/register',[AuthController::class,'create_user']);
 
@@ -55,3 +59,4 @@ Route::post('/login',[AuthController::class,'login_into']);
 // Route::middleware([Auth::class])->groupe(function(){
 
 // });
+

@@ -1,53 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="../../assets/img/favicon.png">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>
-    Material Dashboard Dark PRO by Creative Tim
-  </title>
-<meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+@extends('partials.HTML_tags')
 
+@section('title', 'News Letters')
 
-<link rel="canonical" href="https://www.creative-tim.com/product/material-dashboard-dark-pro" />
-
-<meta name="keywords" content="creative tim, html dashboard, html css dashboard, web dashboard, bootstrap 4 dashboard, bootstrap 4, css3 dashboard, bootstrap 4 admin, material dashboard bootstrap 4 dashboard, frontend, responsive bootstrap 4 dashboard, material design, material dashboard bootstrap 4 dashboard">
-<meta name="description" content="Material Dashboard Dark PRO is a Premium Material Bootstrap 4 Admin with a dark fresh, new design inspired by Google's Material Design.">
-
-<meta itemprop="name" content="Material Dashboard Dark PRO by Creative Tim">
-<meta itemprop="description" content="Material Dashboard Dark PRO is a Premium Material Bootstrap 4 Admin with a dark fresh, new design inspired by Google's Material Design.">
-<meta itemprop="image" content="../../../../raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-dark-pro/opt_mdpd_thumbnail.jpg">
-
-<meta name="twitter:card" content="product">
-<meta name="twitter:site" content="@creativetim">
-<meta name="twitter:title" content="Material Dashboard Dark PRO by Creative Tim">
-<meta name="twitter:description" content="Material Dashboard Dark PRO is a Premium Material Bootstrap 4 Admin with a dark fresh, new design inspired by Google's Material Design.">
-<meta name="twitter:creator" content="@creativetim">
-<meta name="twitter:image" content="../../../../raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-dark-pro/opt_mdpd_thumbnail.jpg">
-
-<meta property="fb:app_id" content="655968634437471">
-<meta property="og:title" content="Material Dashboard Dark PRO by Creative Tim" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="../dashboard.html" />
-<meta property="og:image" content="../../../../raw.githubusercontent.com/creativetimofficial/public-assets/master/material-dashboard-dark-pro/opt_mdpd_thumbnail.jpg" />
-<meta property="og:description" content="Material Dashboard Dark PRO is a Premium Material Bootstrap 4 Admin with a dark fresh, new design inspired by Google's Material Design." />
-<meta property="og:site_name" content="Creative Tim" />
-
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="../../../../maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-
-<link href="../../assets/css/material-dashboard.minf700.css?v=1.0.1" rel="stylesheet" />
-
-<link href="../../assets/demo/demo.css" rel="stylesheet" />
-
-<style>
-    .async-hide {
-      opacity: 0 !important
-    }
-  </style>
-<script src="/assets/js/headerScript.js"></script>
+@section('content')
 </head>
 <body class="dark-edition ">
 
@@ -69,45 +24,197 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header card-header-primary card-header-icon">
-                <div class="card-icon">
-                  <i class="material-icons">assignment</i>
-                </div>
-                  <h4 class="card-title">Simple Table</h4>
+                <button data-bs-toggle="modal" data-bs-target="#modalCategorie">
+                  <div class="card-icon text-white">
+                    <i class="material-icons">add</i>
+                  </div>
+                </button>
+                  <h4 class="card-title">News Letter Table</h4>
+                  @if (session()->has('success'))
+                     <p class="text-success">{{session('success')}}</p> 
+                  @endif
               </div>
+                {{-- Start modal add news letter --}}
+                <div class="modal fade" id="modalCategorie" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add News Letter</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <form action="/newsletters" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <!-- Input field for the image file -->
+                                <div class="mb-3">
+                                    <input type="file" class="form-control" id="image" name="image">
+                                </div>
+                                <!-- Input field for the title -->
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+                                </div>
+                                <!-- Input field for the author -->
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="author" name="author" placeholder="Enter author">
+                                </div>
+                                <!-- Select field for category options -->
+                                <div class="mb-3">
+                                    <select class="form-select w-100 h5 bg-primary border-0 rounded p-2" id="category" name="category">
+                                        <!-- Add options here dynamically based on your categories -->
+                                        @foreach ($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                        <!-- Add more options as needed -->
+
+
+
+
+
+
+
+
+                                        
+
+
+</select>
+                                </div>
+                                <!-- Textarea field for content -->
+                                <div class="mb-3">
+                                    <textarea class="form-control border rounded border-primary" id="content" name="content" rows="3" placeholder="Enter content"></textarea>
+                                </div>
+                                <!-- Input field for link -->
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="link" name="link" placeholder="Enter link">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary mx-2" data-bs-dismiss="modal">Ajouter</button>
+                            </div>
+                        </form>
+                        
+                        
+                      </div>
+                  </div>
+              </div>
+              {{-- End modal add  news letter --}}
           <div class="card-body">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th class="text-center">#</th>
-                    <th>Name</th>
-                    <th>Job Position</th>
-                    <th>Since</th>
-                    <th class="text-right">Salary</th>
-                    <th class="text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="text-center">3</td>
-                    <td>Alex Mike</td>
-                    <td>Design</td>
-                    <td>2010</td>
-                    <td class="text-right">&euro; 92,144</td>
-                    <td class="td-actions text-right">
-                      <button type="button" data-toggle="tooltip" class="btn btn-link text-info">
-                      <i class="material-icons">person</i>
-                      </button>
-                      <button type="button" data-toggle="tooltip" class="btn btn-link text-success">
-                      <i class="material-icons">edit</i>
-                      </button>
-                      <button type="button" data-toggle="tooltip" class="btn btn-link text-danger">
-                      <i class="material-icons">close</i>
-                      </button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="">
+              <div class="row">
+             
+                @foreach ($newsletters as $newsletter)
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <img class="w-100" src="/Uploads/{{$newsletter->image}}" alt="">
+                      <h5 class="card-title">Title: {{$newsletter->title}}</h5>
+                      <p class="card-text">Author: {{$newsletter->author}}</p>
+                      @if($cherchInput == 0)
+                        <p class="card-text">Categorie: {{$newsletter->namecategory}}</p>
+                      @else
+                         <p class="card-text">Categorie: {{$newsletter->category->name}}</p>
+                      @endif
+                      
+                      <a class="card-text text-center text-decoration">link: {{$newsletter->link}}</a>
+                      <div class="text-right">
+                        <button type="button" class="btn btn-link text-success" data-bs-toggle="modal" data-bs-target="#modalnews{{$newsletter->id}}" title="Edit">
+                          <i class="material-icons">edit</i>
+                        </button>
+                        <button type="button" class="btn btn-link text-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$newsletter->id}}" title="Delete">
+                        <i class="material-icons">delete</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{-- Start modal update letter --}}
+                <div>
+                <div class="modal fade" id="modalnews{{$newsletter->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add News Letter</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <form action="/newsletters/{{$newsletter->id}}" method="POST" enctype="multipart/form-data">
+                            @method("PUT")
+                            @csrf
+                            <div class="modal-body">
+                                <!-- Input field for the image file -->
+                                <div class="mb-3">
+                                    <input type="file" class="form-control" id="image" name="image">
+                                </div>
+                                <!-- Input field for the title -->
+                                <div class="mb-3">
+                                    <input type="text" value="{{$newsletter->title}}" class="form-control" id="title" name="title" placeholder="Enter title">
+                                </div>
+                                <!-- Input field for the author -->
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" value="{{$newsletter->author}}" id="author" name="author" placeholder="Enter author">
+                                </div>
+                                <!-- Select field for category options -->
+                                <div class="mb-3">
+                                    <select class="form-select w-100 h5 bg-primary border-0 rounded p-2" id="category" name="category">
+                                        <!-- Add options here dynamically based on your categories -->
+                                        @foreach ($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+                                <!-- Textarea field for content -->
+                                <div class="mb-3">
+                                    <textarea class="form-control border rounded border-primary" id="content" value="{{$newsletter->content}}" name="content" rows="3" placeholder="Enter content"></textarea>
+                                </div>
+                                <!-- Input field for link -->
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="link" name="link" placeholder="Enter link">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary mx-2" data-bs-dismiss="modal">Update</button>
+                            </div>
+                        </form>
+                        
+                        
+                      </div>
+                  </div>
+              </div>
+            </div>
+            {{-- End modal update  letter --}}
+                  {{-- Start modal DELETE news letters --}}
+                  <td>
+                    <div class="modal fade" id="modalDelete{{$newsletter->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Delete News Letter</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <form action="/newsletters/{{ $newsletter->id }}" method="POST">
+                                @method("DELETE") 
+                                  @csrf
+                                  <div class="modal-body">
+                                      <!-- Input field for the name -->
+                                      <div class="mb-3">
+                                          <h5 class="text-danger"> Are you sure to delete this News Letter: {{ $newsletter->title }}</h5>
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-secondary mx-2" data-bs-dismiss="modal">Close</button>
+                                      <button type="submit" class="btn btn-danger mx-2" data-bs-dismiss="modal">Delete</button>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+                  
+                 </td>
+                 {{-- End modal DELETE news letters --}}
+                @endforeach
+              </div>
+              
             </div>
           </div>
             </div>
@@ -117,5 +224,5 @@
     </div>
       </div>
 @include('partials.Auth._scriptes')
-</body>
-</html>
+
+@endsection
