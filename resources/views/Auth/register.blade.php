@@ -174,7 +174,8 @@ There is also a Fully Customizable CMS Admin Dashboard for this product.
 </button>
 <h4 class="mt-3"> or be classical </h4>
 </div>
-<form class="form" method action>
+<form class="form" action="/register" method="post">
+  @csrf
 <div class="form-group has-default">
 <div class="input-group">
 <div class="input-group-prepend">
@@ -182,7 +183,7 @@ There is also a Fully Customizable CMS Admin Dashboard for this product.
 <i class="material-icons">face</i>
 </span>
 </div>
-<input type="text" class="form-control" placeholder="First Name...">
+<input type="text" name="name" id="name" class="form-control" placeholder="First Name...">
 </div>
 </div>
 <div class="form-group has-default">
@@ -192,7 +193,7 @@ There is also a Fully Customizable CMS Admin Dashboard for this product.
 <i class="material-icons">mail</i>
 </span>
 </div>
-<input type="text" class="form-control" placeholder="Email...">
+<input type="email" name="email" id="email" class="form-control" placeholder="Email...">
 </div>
 </div>
 <div class="form-group has-default">
@@ -202,7 +203,7 @@ There is also a Fully Customizable CMS Admin Dashboard for this product.
 <i class="material-icons">lock_outline</i>
 </span>
 </div>
-<input type="password" placeholder="Password..." class="form-control">
+<input type="password" name="password"  id="password" placeholder="Password..." class="form-control">
 </div>
 </div>
 <div class="form-check">
@@ -216,7 +217,7 @@ I agree to the
 </label>
 </div>
 <div class="text-center">
-<a href="javascript:;" class="btn btn-primary btn-round mt-4">Get Started</a>
+<button type="submit" class="btn btn-primary btn-round mt-4" type="submit">Get Started</button>
 </div>
 </form>
 </div>
