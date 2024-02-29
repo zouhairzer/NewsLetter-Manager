@@ -18,16 +18,34 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end">
             <div class="search-form" id="search-form">
-                <form class="navbar-form" action="/search" method="GET">
+                @if($cherchInput==1)
+                <form class="navbar-form" action="/search" method="get">
+                    @else 
+                    <form class="navbar-form" action="/searchbycategory" method="post">
+                @endif
+                    @csrf
+                 @if ($cherchInput==0)
+                 <select name="category">
+                    <option value="">Toutes les catégories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                 @endif
+                    
+                    @if($cherchInput==1)
                     <div class="input-group no-border">
                         <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
-                        <button type="submit" class="btn btn-white btn-round btn-just-icon">
-                            <i class="material-icons">search</i>
-                            <div class="ripple-container"></div>
-                        </button>
-                    </div>
+                        
+                    </div>  
+                    @endif
+                    <button type="submit" class="btn btn-white btn-round btn-just-icon">
+                        <i class="material-icons">search</i>
+                        <div class="ripple-container"></div>
+                    </button>
                 </form>
             </div>
+            
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="javascript:;">

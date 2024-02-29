@@ -41,8 +41,8 @@ class DashboardController extends Controller
         // $mails = $mailsQuery->paginate(10); 
 
         // $categories = Category::all(); 
-
-        return view('tables.Categorie', compact('categories'));
+        $cherchInput = 1;
+        return view('tables.Categorie', compact('categories'), compact('cherchInput'));
     }
     
 }

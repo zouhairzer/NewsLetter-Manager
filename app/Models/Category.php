@@ -12,6 +12,7 @@ class Category extends Model
 
         public function newsletter()
         {
+            
             return $this->hasMany(Newsletter::class);
         }
 }

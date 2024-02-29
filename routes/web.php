@@ -22,6 +22,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::resources([
     'newsletters'=> NewsletterController::class,
     'categories'=> CategoryController::class,
+    'emails'=> MailController::class,
 ]);
 Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
 
@@ -36,16 +37,15 @@ return view('Auth.login');
 Route::get('register' , function(){
 return view('Auth.register');
 });
-Route::get('emails' , function(){
-return view('tables.Emails');
-});
 Route::get('users' , function(){
 return view('tables.user');
 });
 // --------------------------------------- //
 Route::get('/search', [DashboardController::class, 'search']);
-Route::get('/filter', [MailController::class, 'index']);
+Route::get('/filter', [MailController::class, 'filterByEmail'])->name('newletter.filterEmail');
 Route::get('dashboard' , [DashboardController::class,'dashboard']);
+
+Route::post('/searchbycategory' , [NewsletterController::class , 'searchbycategory']);
 
 
 

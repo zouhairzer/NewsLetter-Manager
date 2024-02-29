@@ -17,7 +17,8 @@ class CategoryController extends Controller
         // $categories = Category::all();
         $categories = Category::latest()->simplePaginate(4);
         // dd($categories);
-        return view('tables.Categorie', compact('categories'));
+        $cherchInput = 1;
+        return view('tables.Categorie', compact('categories') , compact('cherchInput'));
     }
 
 

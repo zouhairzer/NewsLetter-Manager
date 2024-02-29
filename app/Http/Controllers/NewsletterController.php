@@ -7,6 +7,7 @@ use App\Http\Requests\StoreNewsletterRequest;
 use App\Http\Requests\UpdateNewsletterRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
 {
@@ -15,8 +16,13 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $newsletters = Newsletter::all();
-        return view('tables.News_Letter', ['newsletters' => $newsletters, 'categories' => Category::all()]);
+        $newsletters = DB::table('newsletters')
+                    ->join('categories', 'categories.id', '=', 'newsletters.category_id')
+                    ->select('categories.name as namecategory', 'newsletters.*')
+                    ->get();
+        $cherchInput=0;
+        
+        return view('tables.News_Letter', ['newsletters' => $newsletters, 'categories' => Category::all()] , compact('cherchInput'));
     }
 
     /**
@@ -68,15 +74,23 @@ class NewsletterController extends Controller
      */
     public function update(UpdateNewsletterRequest $request, Newsletter $newsletter)
     {
+        # delete the old image 
+
         if ($request->hasFile("image")) {
             $oldImage = public_path('Uploads/' . $newsletter->image);
             if (file_exists($oldImage)) {
                unlink($oldImage);
             }
+
+            # move the image into folder Uploads 
+
             $img = $request->file('image');
             $image_name = $img->getClientOriginalName();
             $image = uniqid() . $image_name;
             $img->move('Uploads/', $image);
+
+            # insert the data
+
             $newsletter->title = $request->title;
             $newsletter->author = $request->author;
             $newsletter->category_id = $request->category;
@@ -85,6 +99,9 @@ class NewsletterController extends Controller
             $newsletter->link = $request->link;
             $newsletter->update();
          } else {
+
+            # the image if not existe in the folder will be insert the data normale 
+
             $newsletter->title = $request->title;
             $newsletter->author = $request->author;
             $newsletter->category_id = $request->category;
@@ -103,5 +120,24 @@ class NewsletterController extends Controller
     {
         $newsletter->findOrFail($newsletter->id)->delete();
         return back()->with('success', 'Newsletter deleted successfully');
+    }
+
+
+    public function  searchbycategory(Request $request){
+        $category = $request->input('category');
+        if($category == null){
+            return redirect('/newsletters');
+        }
+
+        $newsletters = DB::table('newsletters')
+                    ->join('categories', 'categories.id', '=', 'newsletters.category_id')
+                    ->select('categories.name as namecategory', 'newsletters.*')
+                    ->where('newsletters.category_id' ,$category)
+                    ->get();
+
+       $cherchInput= 0;
+        return view('tables.News_Letter', ['newsletters' => $newsletters,
+                                'categories' => Category::all()] , 
+                                compact('cherchInput'));
     }
 }
