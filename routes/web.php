@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\test;
 use Illuminate\Support\Facades\Route;
@@ -43,7 +44,7 @@ return view('tables.user');
 });
 // --------------------------------------- //
 Route::get('/search', [DashboardController::class, 'search']);
-Route::get('/filter', [CategoryController::class, 'filter']);
+Route::get('/filter', [MailController::class, 'index']);
 Route::get('dashboard' , [DashboardController::class,'dashboard']);
 
 
