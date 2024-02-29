@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,3 +47,11 @@ Route::get('users' , function(){
 return view('tables.user');
 });
 // --------------------------------------- //
+
+Route::post('/register',[AuthController::class,'create_user']);
+
+Route::post('/login',[AuthController::class,'login_into']);
+
+// Route::middleware([Auth::class])->groupe(function(){
+
+// });
