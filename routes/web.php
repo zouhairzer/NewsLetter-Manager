@@ -4,7 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
-use App\Http\Controllers\test;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -41,6 +41,7 @@ Route::get('users' , function(){
 return view('tables.user');
 });
 // --------------------------------------- //
+
 Route::get('/search', [DashboardController::class, 'search']);
 Route::get('/filter', [MailController::class, 'filterByEmail'])->name('newletter.filterEmail');
 Route::get('dashboard' , [DashboardController::class,'dashboard']);
@@ -48,4 +49,14 @@ Route::get('dashboard' , [DashboardController::class,'dashboard']);
 Route::post('/searchbycategory' , [NewsletterController::class , 'searchbycategory']);
 
 
+
+
+
+Route::post('/register',[AuthController::class,'create_user']);
+
+Route::post('/login',[AuthController::class,'login_into']);
+
+// Route::middleware([Auth::class])->groupe(function(){
+
+// });
 
