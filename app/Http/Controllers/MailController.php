@@ -13,7 +13,9 @@ class MailController extends Controller
      */
     public function index()
     {
-        //
+        $emails = Mail::all();
+        
+        return view('tables.Emails' , compact('emails'));
     }
 
     /**
@@ -54,21 +56,21 @@ class MailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMailRequest $request, Mail $mail)
+    public function update(UpdateMailRequest $request, Mail $mail ,$id)
     {
-        $mail->findOrfail($mail->id);
-        $mail->email = $request->email;
-        $mail->update();
+        $findMail = $mail->findOrfail($id);
+        $findMail->email = $request->email;
+        $findMail->update();
         return back()->with('success', 'Mail updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mail $mail)
+    public function destroy(Mail $mail , $id)
     {
-        $mail->findOrFail($mail->id);
-        $mail->delete();
+        $findEmail = $mail->findOrFail($id);
+        $findEmail->delete();
         return back()->with('success', 'Mail deleted successfully');
     }
 }

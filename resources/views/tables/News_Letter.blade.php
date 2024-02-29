@@ -107,11 +107,12 @@
                         <button type="button" class="btn btn-link text-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$newsletter->id}}" title="Delete">
                         <i class="material-icons">delete</i>
                         </button>
+                        <a href="/send_emails/{{$newsletter->id}}">send as Email</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                {{-- Start modal add news letter --}}
+                {{-- Start modal update letter --}}
                 <div>
                 <div class="modal fade" id="modalnews{{$newsletter->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -166,7 +167,7 @@
                   </div>
               </div>
             </div>
-            {{-- End modal add  news letter --}}
+            {{-- End modal update  letter --}}
                   {{-- Start modal DELETE news letters --}}
                   <td>
                     <div class="modal fade" id="modalDelete{{$newsletter->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

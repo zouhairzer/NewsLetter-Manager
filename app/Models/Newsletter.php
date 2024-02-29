@@ -22,3 +22,4 @@ class Newsletter extends Model
     }
 }
 
+

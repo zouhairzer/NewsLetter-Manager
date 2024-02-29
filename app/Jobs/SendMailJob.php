@@ -33,7 +33,7 @@ class SendMailJob implements ShouldQueue
         $input['image'] = $this->emailDetails['image'];
         $input['content'] = $this->emailDetails['content'];
         $input['link'] = $this->emailDetails['link'];
-
+        // dd($input);
         foreach ($emails as $email) {
             $input['email'] = $email->email;
             FacadesMail::send('mail.sendmail', ['input' => $input], function ($message) use ($input) {

@@ -22,7 +22,7 @@ class StoreMailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|unique:mail,email'
+            'email' => 'required|email|unique:mails,email'
         ];
     }
 }

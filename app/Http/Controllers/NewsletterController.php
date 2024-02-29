@@ -68,15 +68,23 @@ class NewsletterController extends Controller
      */
     public function update(UpdateNewsletterRequest $request, Newsletter $newsletter)
     {
+        # delete the old image 
+
         if ($request->hasFile("image")) {
             $oldImage = public_path('Uploads/' . $newsletter->image);
             if (file_exists($oldImage)) {
                unlink($oldImage);
             }
+
+            # move the image into folder Uploads 
+
             $img = $request->file('image');
             $image_name = $img->getClientOriginalName();
             $image = uniqid() . $image_name;
             $img->move('Uploads/', $image);
+
+            # insert the data
+
             $newsletter->title = $request->title;
             $newsletter->author = $request->author;
             $newsletter->category_id = $request->category;
@@ -85,6 +93,9 @@ class NewsletterController extends Controller
             $newsletter->link = $request->link;
             $newsletter->update();
          } else {
+
+            # the image if not existe in the folder will be insert the data normale 
+
             $newsletter->title = $request->title;
             $newsletter->author = $request->author;
             $newsletter->category_id = $request->category;

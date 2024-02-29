@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\test;
@@ -20,9 +21,10 @@ use Illuminate\Support\Facades\Route;
 Route::resources([
     'newsletters'=> NewsletterController::class,
     'categories'=> CategoryController::class,
+    'emails'=> MailController::class,
 ]);
-Route::get('/send_emails', [SendMailController::class, 'index']);
-Route::post('/send_emails', [SendMailController::class, 'send_emails']);
+// Route::get('/send_emails', [SendMailController::class, 'index']);
+Route::get('/send_emails/{id}', [SendMailController::class, 'send_emails']);
 Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
 
 // ---------- Alll views --------------- //
@@ -37,9 +39,6 @@ return view('Auth.login');
 });
 Route::get('register' , function(){
 return view('Auth.register');
-});
-Route::get('emails' , function(){
-return view('tables.Emails');
 });
 Route::get('users' , function(){
 return view('tables.user');

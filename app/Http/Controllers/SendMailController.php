@@ -8,15 +8,9 @@ use Illuminate\Http\Request;
 
 class SendMailController extends Controller
 {
-    public function index()
+    public function send_emails($id)
     {
-        //the view of show all news letters
-        return view('send_emails');
-    }
-
-    public function send_emails(Request $request)
-    {
-        $newsletters = Newsletter::where('id', $request->id)->first();
+        $newsletters = Newsletter::where('id', $id)->first();
         $emailDetails = [
             'title' => $newsletters->title,
             'image' => $newsletters->image,
@@ -25,6 +19,7 @@ class SendMailController extends Controller
         ];
         $job = (new SendMailJob($emailDetails));
         dispatch($job);
+        // dd('Emails sent successfully');
         return back()->with('success', 'Emails sent successfully');
     }
 }
