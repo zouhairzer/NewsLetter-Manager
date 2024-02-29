@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\test;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::resources([
+    'newsletters'=> NewsletterController::class,
+    'categories'=> CategoryController::class,
+]);
+Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
+
+// ---------- Alll views --------------- //
+
+Route::get('/' , function(){
+return view('Auth.login');
 });
+Route::get('login' , function(){
+return view('Auth.login');
+});
+Route::get('register' , function(){
+return view('Auth.register');
+});
+Route::get('emails' , function(){
+return view('tables.Emails');
+});
+Route::get('users' , function(){
+return view('tables.user');
+});
+// --------------------------------------- //
+Route::get('/search', [DashboardController::class, 'search']);
+Route::get('/filter', [CategoryController::class, 'filter']);
+Route::get('dashboard' , [DashboardController::class,'dashboard']);
+
+
+
