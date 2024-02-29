@@ -123,6 +123,7 @@
                         <button type="button" class="btn btn-link text-danger" data-bs-toggle="modal" data-bs-target="#modalDelete{{$newsletter->id}}" title="Delete">
                         <i class="material-icons">delete</i>
                         </button>
+                        <a href="/send_emails/{{$newsletter->id}}">send as Email</a>
                       </div>
                     </div>
                   </div>

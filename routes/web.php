@@ -4,7 +4,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\NewsletterController;
+
+use App\Http\Controllers\SendMailController;
+use App\Http\Controllers\test;
+
 use App\Http\Controllers\AuthController;
+
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -24,6 +29,8 @@ Route::resources([
     'categories'=> CategoryController::class,
     'emails'=> MailController::class,
 ]);
+// Route::get('/send_emails', [SendMailController::class, 'index']);
+Route::get('/send_emails/{id}', [SendMailController::class, 'send_emails']);
 Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
 
 // ---------- Alll views --------------- //
