@@ -97,24 +97,15 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label
-                                                            class="md-label-floating"
-                                                            >Last Name</label
-                                                        >
-                                                        <input
-                                                            type="text"
-                                                            class="form-control"
-                                                        />
+                                                        <label class="md-label-floating">Last Name</label>
+                                                        <input type="text" class="form-control"/>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label
-                                                            class="md-label-floating"
-                                                            >Adress</label
-                                                        >
+                                                        <label class="md-label-floating">Adress</label>
                                                         <input
                                                             type="text"
                                                             class="form-control"
@@ -126,9 +117,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label
-                                                            class="md-label-floating"
-                                                            >City</label
-                                                        >
+                                                            class="md-label-floating">City</label>                                                        
                                                         <input
                                                             type="text"
                                                             class="form-control"

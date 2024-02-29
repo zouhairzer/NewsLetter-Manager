@@ -8,26 +8,25 @@ use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        $categories = Category::all();
-        return view('tables.Categorie',compact('categories'));
+        // dump(Category::latest());
+        // dump(Category::all());
+        // dump(Category::get());
+        // $categories = Category::all();
+        $categories = Category::latest()->simplePaginate(4);
+        // dd($categories);
+        $cherchInput = 1;
+        return view('tables.Categorie', compact('categories') , compact('cherchInput'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCategoryRequest $request)
     {
         Category::create([
@@ -39,24 +38,18 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category , $id)
+    public function show(Category $category, $id)
     {
-        $categorie = Category::where('id' , $id)->first();
+        $categorie = Category::where('id', $id)->first();
         // dd($categorie);
         return view('tables.updateCategorie', compact('categorie'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Category $category)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
         $category->findOrfail($category->id);
@@ -65,9 +58,6 @@ class CategoryController extends Controller
         return redirect('/categories')->with('success', 'Category updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Category $category)
     {
         Category::findOrFail($category->id)->delete();

@@ -1,14 +1,4 @@
-<!--
-=========================================================
-Material Dashboard Dark PRO - v1.0.1
-=========================================================
 
-Product Page: https://www.creative-tim.com/product/material-dashboard-dark-pro
-Copyright 2020 Creative Tim (https://www.creative-tim.com)
-Coded by Creative Tim
-
-=========================================================
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
     <!-- Mirrored from demos.creative-tim.com/material-dashboard-dark-pro/examples/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 10:48:58 GMT -->
@@ -211,7 +201,8 @@ The above copyright notice and this permission notice shall be included in all c
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-8 ml-auto mr-auto">
-                            <form class="form" method action>
+                            <form class="form" method="post" action="/login">
+                                @csrf
                                 <div class="card card-login card-hidden">
                                     <div
                                         class="card-header card-header-primary text-center"
@@ -263,6 +254,8 @@ The above copyright notice and this permission notice shall be included in all c
                                                 <input
                                                     type="text"
                                                     class="form-control"
+                                                    name="name"
+                                                    id="name"
                                                     placeholder="First Name..."
                                                 />
                                             </div>
@@ -283,6 +276,8 @@ The above copyright notice and this permission notice shall be included in all c
                                                 </div>
                                                 <input
                                                     type="email"
+                                                    name="email"
+                                                    id="email"
                                                     class="form-control"
                                                     placeholder="Email..."
                                                 />
@@ -304,6 +299,8 @@ The above copyright notice and this permission notice shall be included in all c
                                                 </div>
                                                 <input
                                                     type="password"
+                                                    name="password"
+                                                    id="password"
                                                     class="form-control"
                                                     placeholder="Password..."
                                                 />
@@ -313,11 +310,11 @@ The above copyright notice and this permission notice shall be included in all c
                                     <div
                                         class="card-footer justify-content-center"
                                     >
-                                        <a
-                                            href="javascript:;"
-                                            class="btn btn-primary"
-                                            >Lets Go</a
-                                        >
+                                    <button type="submit" 
+                                        class="btn btn-primary btn-round mt-4" 
+                                        type="submit">
+                                        Get Started
+                                    </button>
                                     </div>
                                 </div>
                             </form>
@@ -744,3 +741,4 @@ The above copyright notice and this permission notice shall be included in all c
 
     <!-- Mirrored from demos.creative-tim.com/material-dashboard-dark-pro/examples/pages/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Feb 2024 10:48:58 GMT -->
 </html>
+

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreNewsletterRequest;
 use App\Http\Requests\UpdateNewsletterRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class NewsletterController extends Controller
 {
@@ -15,8 +16,13 @@ class NewsletterController extends Controller
      */
     public function index()
     {
-        $newsletters = Newsletter::all();
-        return view('tables.News_Letter', ['newsletters' => $newsletters, 'categories' => Category::all()]);
+        $newsletters = DB::table('newsletters')
+                    ->join('categories', 'categories.id', '=', 'newsletters.category_id')
+                    ->select('categories.name as namecategory', 'newsletters.*')
+                    ->get();
+        $cherchInput=0;
+        
+        return view('tables.News_Letter', ['newsletters' => $newsletters, 'categories' => Category::all()] , compact('cherchInput'));
     }
 
     /**
@@ -114,5 +120,24 @@ class NewsletterController extends Controller
     {
         $newsletter->findOrFail($newsletter->id)->delete();
         return back()->with('success', 'Newsletter deleted successfully');
+    }
+
+
+    public function  searchbycategory(Request $request){
+        $category = $request->input('category');
+        if($category == null){
+            return redirect('/newsletters');
+        }
+
+        $newsletters = DB::table('newsletters')
+                    ->join('categories', 'categories.id', '=', 'newsletters.category_id')
+                    ->select('categories.name as namecategory', 'newsletters.*')
+                    ->where('newsletters.category_id' ,$category)
+                    ->get();
+
+       $cherchInput= 0;
+        return view('tables.News_Letter', ['newsletters' => $newsletters,
+                                'categories' => Category::all()] , 
+                                compact('cherchInput'));
     }
 }
