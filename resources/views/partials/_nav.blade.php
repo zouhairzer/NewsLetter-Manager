@@ -17,14 +17,14 @@
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end">
-            <div class="search-form" id="search-form">
-                @if($cherchInput==1)
+            <div class="search-form" id="search-form">  
+                @if($cherchInput && $cherchInput==1)
                 <form class="navbar-form" action="/search" method="get">
                     @else 
                     <form class="navbar-form" action="/searchbycategory" method="post">
                 @endif
                     @csrf
-                 @if ($cherchInput==0)
+                 @if($cherchInput && $cherchInput==0)
                  <select name="category">
                     <option value="">Toutes les catégories</option>
                     @foreach($categories as $category)
@@ -33,7 +33,7 @@
                 </select>
                  @endif
                     
-                    @if($cherchInput==1)
+                    @if($cherchInput && $cherchInput==1)
                     <div class="input-group no-border">
                         <input type="text" class="form-control" placeholder="Search..." id="search" name="search">
                         
@@ -84,7 +84,10 @@
                         <a class="dropdown-item" href="#">Profile</a>
                         <a class="dropdown-item" href="#">Settings</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">Log out</a>
+                    <form action="/logout" method="POST">
+                        @csrf 
+                        <button type="submit" class="dropdown-item" >Log out</button>
+                    </form>
                     </div>
                 </li>
             </ul>

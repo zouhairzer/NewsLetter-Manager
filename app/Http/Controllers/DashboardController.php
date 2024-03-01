@@ -8,15 +8,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    // public function dashboard(){
+    public function dashboard(){
       
-    //     // $mailsQuery = Mail::query();
-
-    //     $categories = Category::all(); 
-    //     // $mails = $mailsQuery->paginate(10); 
-    //     return view('dashboard', compact('categories','mails'));
+      $cherchInput = 1 ;
+        return view('dashboard' ,compact('cherchInput'));
         
-    // }
+    }
     public function search(Request $request)
     {
         

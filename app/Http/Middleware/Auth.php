@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use App\Models\User;
 
 class Auth
 {
@@ -19,7 +20,9 @@ class Auth
     {
         if(!$request->cookie('token'))
         {
-            echo('bad');
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
         }
         else{
             $token = $request->cookie('token');
@@ -27,7 +30,11 @@ class Auth
             $user = User::find($data->sub);
             
             if(!$user){
-                echo "1949";
+
+                return response()->json([
+                    'message' => 'Unauthorized'
+                ], 401);
+
             }
 
             else{

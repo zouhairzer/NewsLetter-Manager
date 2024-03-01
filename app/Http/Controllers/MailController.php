@@ -17,9 +17,9 @@ class MailController extends Controller
     public function index()
     {
         $emails = Mail::all();
+        $cherchInput = 1 ;
         
-        
-        return view('tables.Emails' , compact('emails'));
+        return view('tables.Emails' , compact('emails','cherchInput'));
     }
 
     /**

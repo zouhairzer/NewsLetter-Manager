@@ -9,9 +9,11 @@ use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\test;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Karnel;
 
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,36 +26,26 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::resources([
-    'newsletters'=> NewsletterController::class,
-    'categories'=> CategoryController::class,
-    'emails'=> MailController::class,
-]);
-// Route::get('/send_emails', [SendMailController::class, 'index']);
-Route::get('/send_emails/{id}', [SendMailController::class, 'send_emails']);
-Route::get('/updatePage/{id}', [CategoryController::class, 'show']);
+Route::middleware('Auth')->group(function(){
+    Route::resources([
+        'newsletters'=> NewsletterController::class,
+        'categories'=> CategoryController::class,
+        'emails'=> MailController::class,
+    ]);
+});
 
 // ---------- Alll views --------------- //
 
 Route::get('/' , function(){
-return view('Auth.login');
+    return view('Auth.login');
 });
 Route::get('login' , function(){
-return view('Auth.login');
+    return view('Auth.login');
 });
 Route::get('register' , function(){
-return view('Auth.register');
-});
-Route::get('users' , function(){
-return view('tables.user');
+    return view('Auth.register');
 });
 // --------------------------------------- //
-
-Route::get('/search', [DashboardController::class, 'search']);
-Route::get('/filter', [MailController::class, 'filterByEmail'])->name('newletter.filterEmail');
-Route::get('dashboard' , [DashboardController::class,'dashboard']);
-
-Route::post('/searchbycategory' , [NewsletterController::class , 'searchbycategory']);
 
 
 
@@ -63,7 +55,21 @@ Route::post('/register',[AuthController::class,'create_user']);
 
 Route::post('/login',[AuthController::class,'login_into']);
 
-// Route::middleware([Auth::class])->groupe(function(){
 
-// });
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('Auth');
+
+Route::get('/search', [DashboardController::class, 'search'])->middleware('Auth');
+
+Route::get('/filter', [MailController::class, 'filterByEmail'])->name('newsletter.filterEmail')->middleware('Auth');
+
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('Auth');
+
+Route::post('/searchbycategory', [NewsletterController::class, 'searchbycategory'])->middleware('Auth');
+
+Route::get('/send_emails/{id}', [SendMailController::class, 'send_emails'])->middleware('Auth');
+
+Route::get('/updatePage/{id}', [CategoryController::class, 'show'])->middleware('Auth');
+
+
 

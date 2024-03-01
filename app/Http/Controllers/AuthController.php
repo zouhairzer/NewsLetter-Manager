@@ -52,13 +52,21 @@ class AuthController extends Controller
             // dd($payload);
             
             $jwt = JWT::encode($payload, $_ENV['JWT_SECRET'], $_ENV['JWT_ALGO']);
+
             // dd($jwt);
+            
             $cookie = cookie('token',$jwt,120);
 
-                 return redirect()->to('dashboard')->withCookie($cookie);
+                 return redirect()->to('/dashboard')->withCookie($cookie);
         }
         else{
             return redirect()->back();
         }
     }
+
+    public function logout(){
+        Session::flush();
+        return redirect('/login');
+    }
+    
 }
