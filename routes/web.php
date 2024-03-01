@@ -57,7 +57,7 @@ Route::post('/login',[AuthController::class,'login_into']);
 
 
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('Auth');
+Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/search', [DashboardController::class, 'search'])->middleware('Auth');
 
